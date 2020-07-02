@@ -1,0 +1,24 @@
+
+from IPython.display import clear_output
+import os
+
+def clear_output(**kwargs):
+    os.system('clear')
+
+def update_progress(progress, text_info='', log=[]):
+    bar_length = 20
+    if isinstance(progress, int):
+        progress = float(progress)
+    if not isinstance(progress, float):
+        progress = 0
+    if progress < 0:
+        progress = 0
+    if progress >= 1:
+        progress = 1
+    block = int(np.floor(bar_length * progress))
+    clear_output(wait = True)
+    for i in log:
+        print(i)
+    text = "{0} Progress: [{1}] {2:.2f}%".format(text_info, "=" * block + ">"+" "*(bar_length - block), progress*100)
+    print(text)
+    return(text)
